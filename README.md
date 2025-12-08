@@ -1,0 +1,2 @@
+# pygame-SceneTransition
+pygameで画面遷移処理の検証を行うプロジェクト
