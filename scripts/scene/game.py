@@ -3,6 +3,7 @@ from scripts.scene.base import Scene
 from scripts.scene.ids import SceneID
 from scripts.transition.fade import FadeTransition
 from scripts.transition.wipe import WipeTransition
+from scripts.transition.slide import SlideTransition
 
 
 class GameScene(Scene):
@@ -19,7 +20,7 @@ class GameScene(Scene):
         if self.game.inputs["enter"]:
             self.manager.goto(
                 SceneID.TITLE,
-                transition=FadeTransition(duration=0.5, mode="black")
+                transition=SlideTransition(duration=0.5, direction="right")
             )
 
         # ワイプ遷移

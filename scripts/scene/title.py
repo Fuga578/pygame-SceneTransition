@@ -3,6 +3,7 @@ from scripts.scene.base import Scene
 from scripts.scene.ids import SceneID
 from scripts.transition.fade import FadeTransition
 from scripts.transition.wipe import WipeTransition
+from scripts.transition.slide import SlideTransition
 
 
 class TitleScene(Scene):
@@ -20,7 +21,7 @@ class TitleScene(Scene):
         if self.game.inputs["enter"]:
             self.manager.goto(
                 SceneID.GAME,
-                transition=FadeTransition(duration=0.5, mode="black")
+                transition=FadeTransition(duration=0.5, mode="inout")
             )
 
         # W キーでワイプ遷移したい場合
