@@ -1,8 +1,7 @@
 import sys
 import pygame
-from scripts.constants.game_constants import GameConstants
-from scripts.scene.manager import SceneManager
-from scripts.scene.ids import SceneID
+from scripts.constants import GameConstants
+from scripts.scene import SceneID, SceneManager
 
 
 class Game:
@@ -18,8 +17,16 @@ class Game:
 
         # 入力
         self.inputs = {
+            "esc": False,
             "enter": False,
             "w": False,
+            "a": False,
+            "s": False,
+            "d": False,
+            "up": False,
+            "down": False,
+            "left": False,
+            "right": False,
         }
 
         # シーン
@@ -35,16 +42,46 @@ class Game:
                 self.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.exit()
+                    self.inputs["esc"] = True
                 if event.key == pygame.K_RETURN:
                     self.inputs["enter"] = True
                 if event.key == pygame.K_w:
                     self.inputs["w"] = True
+                if event.key == pygame.K_a:
+                    self.inputs["a"] = True
+                if event.key == pygame.K_s:
+                    self.inputs["s"] = True
+                if event.key == pygame.K_d:
+                    self.inputs["d"] = True
+                if event.key == pygame.K_UP:
+                    self.inputs["up"] = True
+                if event.key == pygame.K_DOWN:
+                    self.inputs["down"] = True
+                if event.key == pygame.K_LEFT:
+                    self.inputs["left"] = True
+                if event.key == pygame.K_RIGHT:
+                    self.inputs["right"] = True
             if event.type == pygame.KEYUP:
+                if event.key == pygame.K_ESCAPE:
+                    self.inputs["esc"] = False
                 if event.key == pygame.K_RETURN:
                     self.inputs["enter"] = False
                 if event.key == pygame.K_w:
                     self.inputs["w"] = False
+                if event.key == pygame.K_a:
+                    self.inputs["a"] = False
+                if event.key == pygame.K_s:
+                    self.inputs["s"] = False
+                if event.key == pygame.K_d:
+                    self.inputs["d"] = False
+                if event.key == pygame.K_UP:
+                    self.inputs["up"] = False
+                if event.key == pygame.K_DOWN:
+                    self.inputs["down"] = False
+                if event.key == pygame.K_LEFT:
+                    self.inputs["left"] = False
+                if event.key == pygame.K_RIGHT:
+                    self.inputs["right"] = False
 
     def run(self):
         while True:
@@ -53,7 +90,7 @@ class Game:
             dt = self.clock.tick(GameConstants.FPS) / 1000.0
 
             # 背景の塗りつぶし
-            self.screen.fill(GameConstants.COLOR["white"])
+            self.screen.fill(GameConstants.COLORS["white"])
 
             # シーンの更新と描画
             self.scene_manager.handle()

@@ -1,12 +1,16 @@
 import pygame
-from scripts.scene.ids import SceneID
-from scripts.scene.base import Scene
-from scripts.scene.title import TitleScene
-from scripts.scene.game import GameScene
+from scripts.scene.ids import SceneID, Scene, TitleScene, FadeScene
 
 
 class SceneManager:
-    def __init__(self, game: "Game", start_scene_id: SceneID):
+    """
+    シーン管理クラス
+    
+    Args:
+        game (Game): ゲーム本体のインスタンス
+        start_scene_id (SceneID): 最初に表示するシーンのID
+    """
+    def __init__(self, game, start_scene_id: SceneID):
         self.game = game
         self.current_scene: Scene = self._create_scene(start_scene_id)
 
@@ -19,12 +23,12 @@ class SceneManager:
     def _create_scene(self, scene_id: SceneID) -> Scene:
         if scene_id == SceneID.TITLE:
             return TitleScene(self.game, self)
-        elif scene_id == SceneID.GAME:
-            return GameScene(self.game, self)
+        elif scene_id == SceneID.FADE:
+            return FadeScene(self.game, self)
         else:
             raise ValueError(f"未知の SceneID: {scene_id}")
 
-    def goto(self, scene_id: SceneID, transition=None):
+    def change_scene(self, scene_id: SceneID, transition=None):
         # トランジション無しの場合、即切り替え
         if transition is None:
             self.current_scene = self._create_scene(scene_id)

@@ -13,7 +13,13 @@ class GameConstants(metaclass=ConstantMeta):
     FPS = 60
 
     # 色
-    COLOR = {
+    COLORS = {
         "black": (0, 0, 0),
         "white": (255, 255, 255),
+    }
+
+    # 背景色
+    BG_COLORS = {
+        "title": (50, 50, 50),
+        "fade": (50, 0, 0),
     }

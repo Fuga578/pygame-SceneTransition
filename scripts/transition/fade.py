@@ -1,16 +1,35 @@
 import pygame
+from enum import Enum
 from scripts.transition.base import Transition
 
 
+class FadeMode(Enum):
+    """
+    フェードモード列挙型
+    
+    OUT   : フェードアウト
+    IN    : フェードイン
+    INOUT : フェードインアウト
+    CROSS : クロスフェード
+    """
+    
+    OUT = "out"
+    IN = "in"
+    INOUT = "inout"
+    CROSS = "cross"
+
+
 class FadeTransition(Transition):
-    def __init__(self, duration=0.5, mode="out", color=(0, 0, 0)):
-        """
-        mode:
-            "out"    : old → 単色にフェードアウト
-            "in"     : 単色 → new にフェードイン
-            "inout"  : old → 単色 → new（2段階フェード）
-            "cross"  : old と new をクロスフェード
-        """
+    """
+    フェード遷移クラス
+
+    Args:
+        duration (float): 遷移時間（秒）
+        mode (FadeMode): フェードモード  
+        color (tuple): フェードカラー（RGB）
+    """
+
+    def __init__(self, duration=0.5, mode=FadeMode.OUT, color=(0, 0, 0)):
         super().__init__(duration)
 
         self.mode = mode
@@ -21,7 +40,7 @@ class FadeTransition(Transition):
         t = max(0.0, min(1.0, t))
 
         # クロスフェード 
-        if self.mode == "cross":
+        if self.mode == FadeMode.CROSS:
             alpha_new = int(t * 255)
             alpha_old = 255 - alpha_new
 
@@ -36,7 +55,7 @@ class FadeTransition(Transition):
             return
 
         # フェードイン
-        if self.mode == "in":
+        if self.mode == FadeMode.IN:
             # 先に new を描く
             surface.blit(new_surface, (0, 0))
 
@@ -50,7 +69,7 @@ class FadeTransition(Transition):
             return
 
         # フェードアウト
-        if self.mode == "out":
+        if self.mode == FadeMode.OUT:
             surface.blit(old_surface, (0, 0))
 
             w, h = surface.get_size()
@@ -62,7 +81,7 @@ class FadeTransition(Transition):
             return
 
         # フェードイン -> フェードアウト
-        if self.mode == "inout":
+        if self.mode == FadeMode.INOUT:
             w, h = surface.get_size()
             rect_surf = pygame.Surface((w, h))
             rect_surf.fill(self.color)
