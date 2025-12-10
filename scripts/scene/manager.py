@@ -1,5 +1,13 @@
 import pygame
-from scripts.scene.ids import SceneID, Scene, TitleScene, FadeScene
+from scripts.scene import Scene, SceneID
+from scripts.scene.title import TitleScene
+from scripts.scene.fade import FadeScene
+from scripts.scene.slide import SlideScene
+from scripts.scene.wipe import WipeScene
+from scripts.scene.blind import BlindScene
+from scripts.scene.circle_wipe import CircleWipeScene
+from scripts.scene.puzzle import PuzzleScene
+from scripts.scene.rotate_wipe import RotateWipeScene
 
 
 class SceneManager:
@@ -25,6 +33,18 @@ class SceneManager:
             return TitleScene(self.game, self)
         elif scene_id == SceneID.FADE:
             return FadeScene(self.game, self)
+        elif scene_id == SceneID.SLIDE:
+            return SlideScene(self.game, self)
+        elif scene_id == SceneID.WIPE:
+            return WipeScene(self.game, self)
+        elif scene_id == SceneID.BLIND:
+            return BlindScene(self.game, self)
+        elif scene_id == SceneID.CIRCLE_WIPE:
+            return CircleWipeScene(self.game, self)
+        elif scene_id == SceneID.PUZZLE:
+            return PuzzleScene(self.game, self)
+        elif scene_id == SceneID.ROTATE_WIPE:
+            return RotateWipeScene(self.game, self)
         else:
             raise ValueError(f"未知の SceneID: {scene_id}")
 

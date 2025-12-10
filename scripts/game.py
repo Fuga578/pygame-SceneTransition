@@ -1,7 +1,8 @@
 import sys
 import pygame
 from scripts.constants import GameConstants
-from scripts.scene import SceneID, SceneManager
+from scripts.scene.ids import SceneID
+from scripts.scene.manager import SceneManager
 
 
 class Game:

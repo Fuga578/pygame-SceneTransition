@@ -1,5 +1,5 @@
 import pygame
-from scripts.constants import GameConstants
+import random
 from scripts.scene import Scene, SceneID
 from scripts.transition import FadeTransition, FadeMode
 
@@ -29,6 +29,7 @@ class FadeScene(Scene):
         self.white_fade_in_text = self.small_font.render("down: White Fade In", True, (255, 255, 255))
         self.white_fade_inout_text = self.small_font.render("left: White Fade InOut", True, (255, 255, 255))
         
+        self.bg_color = (random.randint(0, 150), random.randint(0, 150), random.randint(0, 150))
 
     def handle(self):
         # タイトルに戻る
@@ -81,7 +82,7 @@ class FadeScene(Scene):
         pass
 
     def render(self, surface):
-        surface.fill(GameConstants.BG_COLORS["fade"])
+        surface.fill(self.bg_color)
         surface.blit(self.title_text, (50, 50))
         surface.blit(self.back_text, (50, 100))
         surface.blit(self.cross_fade_text, (50, 150))

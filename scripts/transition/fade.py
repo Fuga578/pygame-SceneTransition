@@ -1,6 +1,6 @@
 import pygame
 from enum import Enum
-from scripts.transition.base import Transition
+from scripts.transition import Transition
 
 
 class FadeMode(Enum):
@@ -36,7 +36,7 @@ class FadeTransition(Transition):
         self.color = color
 
     def render(self, surface, old_surface, new_surface):
-        t = self.elapsed / self.duration  # 0.0 → 1.0
+        t = self.elapsed / self.duration  # 0.0 -> 1.0
         t = max(0.0, min(1.0, t))
 
         # クロスフェード 
@@ -88,14 +88,14 @@ class FadeTransition(Transition):
 
             if t < 0.5:
                 # old をカラーにフェードアウト
-                local_t = t / 0.5  # 0 → 1
+                local_t = t / 0.5  # 0 -> 1
                 surface.blit(old_surface, (0, 0))
                 alpha = int(local_t * 255)
                 rect_surf.set_alpha(alpha)
                 surface.blit(rect_surf, (0, 0))
             else:
                 # カラーから new をフェードイン
-                local_t = (t - 0.5) / 0.5  # 0 → 1
+                local_t = (t - 0.5) / 0.5  # 0 -> 1
                 surface.blit(new_surface, (0, 0))
                 alpha = int((1.0 - local_t) * 255)
                 rect_surf.set_alpha(alpha)
