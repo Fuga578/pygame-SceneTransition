@@ -11,3 +11,4 @@ class SceneID(Enum):
     PUZZLE = auto()  # パズル遷移デモシーン
     ROTATE_WIPE = auto()  # 回転ワイプ遷移デモシーン
     ZOOM = auto()  # ズーム遷移デモシーン
+    MOSAIC = auto()  # モザイク遷移デモシーン

@@ -1,7 +1,7 @@
 import pygame
 import random
 from scripts.scene import Scene, SceneID
-from scripts.transition.circle_wipe import CircleWipeTransition, CircleWipeMode
+from scripts.transition import CircleWipeTransition, CircleWipeMode
 
 
 class CircleWipeScene(Scene):

@@ -28,6 +28,14 @@ class Game:
             "down": False,
             "left": False,
             "right": False,
+            "q": False,
+            "z": False,
+            "x": False,
+            "c": False,
+            "v": False,
+            "b": False,
+            "n": False,
+            "m": False,
         }
 
         # シーン
@@ -62,6 +70,22 @@ class Game:
                     self.inputs["left"] = True
                 if event.key == pygame.K_RIGHT:
                     self.inputs["right"] = True
+                if event.key == pygame.K_q:
+                    self.inputs["q"] = True
+                if event.key == pygame.K_z:
+                    self.inputs["z"] = True
+                if event.key == pygame.K_x:
+                    self.inputs["x"] = True
+                if event.key == pygame.K_c:
+                    self.inputs["c"] = True
+                if event.key == pygame.K_v:
+                    self.inputs["v"] = True
+                if event.key == pygame.K_b:
+                    self.inputs["b"] = True
+                if event.key == pygame.K_n:
+                    self.inputs["n"] = True
+                if event.key == pygame.K_m:
+                    self.inputs["m"] = True
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_ESCAPE:
                     self.inputs["esc"] = False
@@ -83,6 +107,22 @@ class Game:
                     self.inputs["left"] = False
                 if event.key == pygame.K_RIGHT:
                     self.inputs["right"] = False
+                if event.key == pygame.K_q:
+                    self.inputs["q"] = False
+                if event.key == pygame.K_z:
+                    self.inputs["z"] = False
+                if event.key == pygame.K_x:
+                    self.inputs["x"] = False
+                if event.key == pygame.K_c:
+                    self.inputs["c"] = False
+                if event.key == pygame.K_v:
+                    self.inputs["v"] = False
+                if event.key == pygame.K_b:
+                    self.inputs["b"] = False
+                if event.key == pygame.K_n:
+                    self.inputs["n"] = False
+                if event.key == pygame.K_m:
+                    self.inputs["m"] = False
 
     def run(self):
         while True:

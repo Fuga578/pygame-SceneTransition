@@ -1,7 +1,7 @@
 import pygame
 import random
 from scripts.scene import Scene, SceneID
-from scripts.transition.wipe import WipeTransition, WipeDirection
+from scripts.transition import WipeTransition, WipeDirection
 
 
 class WipeScene(Scene):

@@ -1,7 +1,7 @@
 import pygame
 import random
 from scripts.scene import Scene, SceneID
-from scripts.transition.puzzle import PuzzleTransition
+from scripts.transition import PuzzleTransition
 
 
 class PuzzleScene(Scene):
