@@ -10,3 +10,4 @@ class SceneID(Enum):
     CIRCLE_WIPE = auto()    # 円形ワイプ遷移デモシーン
     PUZZLE = auto()  # パズル遷移デモシーン
     ROTATE_WIPE = auto()  # 回転ワイプ遷移デモシーン
+    ZOOM = auto()  # ズーム遷移デモシーン
