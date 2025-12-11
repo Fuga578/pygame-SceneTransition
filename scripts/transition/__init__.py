@@ -7,6 +7,7 @@ from .blind import BlindTransition, BlindDirection
 from .puzzle import PuzzleTransition
 from .rotate_wipe import RotateWipeTransition, RotateWipeDirection
 from .zoom import ZoomTransition, ZoomMode
+from .mosaic import MosaicTransition, MosaicMode
 
 __all__ = [
     "Transition",
@@ -25,4 +26,6 @@ __all__ = [
     "RotateWipeDirection",
     "ZoomTransition",
     "ZoomMode",
+    "MosaicTransition",
+    "MosaicMode",
 ]

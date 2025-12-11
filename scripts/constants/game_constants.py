@@ -7,7 +7,7 @@ class GameConstants(metaclass=ConstantMeta):
     SCREEN_WIDTH = 800
 
     # ゲーム画面高さ
-    SCREEN_HEIGHT = 600
+    SCREEN_HEIGHT = 800
     
     # フレームレート
     FPS = 60

@@ -1,7 +1,7 @@
 import pygame
 import random
 from scripts.scene import Scene, SceneID
-from scripts.transition.rotate_wipe import RotateWipeTransition, RotateWipeDirection
+from scripts.transition import RotateWipeTransition, RotateWipeDirection
 
 
 class RotateWipeScene(Scene):

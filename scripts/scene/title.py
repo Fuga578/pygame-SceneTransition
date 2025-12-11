@@ -2,14 +2,11 @@ import pygame
 import random
 from scripts.scene import Scene, SceneID
 from scripts.effect import ScreenShakeEffect
-from scripts.transition.fade import FadeTransition, FadeMode
-from scripts.transition.slide import SlideTransition, SlideDirection
-from scripts.transition.wipe import WipeTransition, WipeDirection
-from scripts.transition.blind import BlindTransition, BlindDirection
-from scripts.transition.circle_wipe import CircleWipeTransition, CircleWipeMode
-from scripts.transition.puzzle import PuzzleTransition
-from scripts.transition.rotate_wipe import RotateWipeTransition, RotateWipeDirection
-from scripts.transition.zoom import ZoomTransition, ZoomMode
+from scripts.transition import FadeTransition, FadeMode, \
+    SlideTransition, SlideDirection, WipeTransition, WipeDirection, \
+    BlindTransition, BlindDirection, CircleWipeTransition, CircleWipeMode, \
+    PuzzleTransition, RotateWipeTransition, RotateWipeDirection, \
+    ZoomTransition, ZoomMode, MosaicTransition, MosaicMode
 
 
 class TitleScene(Scene):
@@ -36,13 +33,14 @@ class TitleScene(Scene):
         self.rotate_slide_text = self.small_font.render("left: Go to Rotate Slide Scene", True, (255, 255, 255))
         self.zoom_text = self.small_font.render("right: Go to Zoom Scene", True, (255, 255, 255))
         self.screen_shake_text = self.small_font.render("Enter: Screen Shake", True, (255, 255, 255))
+        self.mosaic_text = self.small_font.render("z: Go to Mosaic Scene", True, (255, 255, 255))
 
         self.bg_color = (random.randint(0, 150), random.randint(0, 150), random.randint(0, 150))
         
         self.screen_shake_effect = ScreenShakeEffect()
 
     def handle(self):
-        if self.game.inputs["esc"]:
+        if self.game.inputs["q"]:
             self.game.exit()
         elif self.game.inputs["w"]:
             self.manager.change_scene(
@@ -86,6 +84,11 @@ class TitleScene(Scene):
             )
         elif self.game.inputs["enter"]:
             self.screen_shake_effect.start()
+        elif self.game.inputs["z"]:
+            self.manager.change_scene(
+                SceneID.MOSAIC,
+                transition=MosaicTransition(duration=1.0, mode=MosaicMode.INOUT)
+            )
 
     def update(self, dt):
         self.screen_shake_effect.update(dt)
@@ -93,14 +96,15 @@ class TitleScene(Scene):
     def render(self, surface):
         surface.fill(self.bg_color)
         surface.blit(self.title_text, (50, 50))
-        surface.blit(self.fade_scene_text, (50, 150))
-        surface.blit(self.slide_scene_text, (50, 200))
-        surface.blit(self.wipe_scene_text, (50, 250))
-        surface.blit(self.blind_scene_text, (50, 300))
-        surface.blit(self.circle_wipe_text, (50, 350))
-        surface.blit(self.puzzle_text, (50, 400))
-        surface.blit(self.rotate_slide_text, (50, 450))
-        surface.blit(self.zoom_text, (50, 500))
-        surface.blit(self.screen_shake_text, (50, 550))
+        surface.blit(self.fade_scene_text, (50, 100))
+        surface.blit(self.slide_scene_text, (50, 140))
+        surface.blit(self.wipe_scene_text, (50, 180))
+        surface.blit(self.blind_scene_text, (50, 220))
+        surface.blit(self.circle_wipe_text, (50, 260))
+        surface.blit(self.puzzle_text, (50, 300))
+        surface.blit(self.rotate_slide_text, (50, 340))
+        surface.blit(self.zoom_text, (50, 380))
+        surface.blit(self.screen_shake_text, (50, 420))
+        surface.blit(self.mosaic_text, (50, 460))
 
         self.screen_shake_effect.apply(surface)

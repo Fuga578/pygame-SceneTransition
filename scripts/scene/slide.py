@@ -1,7 +1,7 @@
 import pygame
 import random
 from scripts.scene import Scene, SceneID
-from scripts.transition.slide import SlideTransition, SlideDirection
+from scripts.transition import SlideTransition, SlideDirection
 
 
 class SlideScene(Scene):

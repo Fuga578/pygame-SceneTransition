@@ -1,7 +1,7 @@
 import pygame
 import random
 from scripts.scene import Scene, SceneID
-from scripts.transition.blind import BlindTransition, BlindDirection
+from scripts.transition import BlindTransition, BlindDirection
 
 
 class BlindScene(Scene):
