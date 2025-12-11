@@ -1,6 +1,7 @@
 import pygame
 import random
 from scripts.scene import Scene, SceneID
+from scripts.effect import ScreenShakeEffect
 from scripts.transition.fade import FadeTransition, FadeMode
 from scripts.transition.slide import SlideTransition, SlideDirection
 from scripts.transition.wipe import WipeTransition, WipeDirection
@@ -34,11 +35,16 @@ class TitleScene(Scene):
         self.puzzle_text = self.small_font.render("down: Go to Puzzle Scene", True, (255, 255, 255))
         self.rotate_slide_text = self.small_font.render("left: Go to Rotate Slide Scene", True, (255, 255, 255))
         self.zoom_text = self.small_font.render("right: Go to Zoom Scene", True, (255, 255, 255))
+        self.screen_shake_text = self.small_font.render("Enter: Screen Shake", True, (255, 255, 255))
 
         self.bg_color = (random.randint(0, 150), random.randint(0, 150), random.randint(0, 150))
+        
+        self.screen_shake_effect = ScreenShakeEffect()
 
     def handle(self):
-        if self.game.inputs["w"]:
+        if self.game.inputs["esc"]:
+            self.game.exit()
+        elif self.game.inputs["w"]:
             self.manager.change_scene(
                 SceneID.FADE,
                 transition=FadeTransition(duration=0.5, mode=FadeMode.OUT)
@@ -78,9 +84,11 @@ class TitleScene(Scene):
                 SceneID.ZOOM,
                 transition=ZoomTransition(duration=0.8, mode=ZoomMode.IN)
             )
+        elif self.game.inputs["enter"]:
+            self.screen_shake_effect.start()
 
     def update(self, dt):
-        pass
+        self.screen_shake_effect.update(dt)
 
     def render(self, surface):
         surface.fill(self.bg_color)
@@ -93,3 +101,6 @@ class TitleScene(Scene):
         surface.blit(self.puzzle_text, (50, 400))
         surface.blit(self.rotate_slide_text, (50, 450))
         surface.blit(self.zoom_text, (50, 500))
+        surface.blit(self.screen_shake_text, (50, 550))
+
+        self.screen_shake_effect.apply(surface)
