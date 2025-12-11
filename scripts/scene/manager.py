@@ -8,6 +8,7 @@ from scripts.scene.blind import BlindScene
 from scripts.scene.circle_wipe import CircleWipeScene
 from scripts.scene.puzzle import PuzzleScene
 from scripts.scene.rotate_wipe import RotateWipeScene
+from scripts.scene.zoom import ZoomScene
 
 
 class SceneManager:
@@ -45,6 +46,8 @@ class SceneManager:
             return PuzzleScene(self.game, self)
         elif scene_id == SceneID.ROTATE_WIPE:
             return RotateWipeScene(self.game, self)
+        elif scene_id == SceneID.ZOOM:
+            return ZoomScene(self.game, self)
         else:
             raise ValueError(f"未知の SceneID: {scene_id}")
 

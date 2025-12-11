@@ -6,6 +6,7 @@ from .circle_wipe import CircleWipeTransition, CircleWipeMode
 from .blind import BlindTransition, BlindDirection
 from .puzzle import PuzzleTransition
 from .rotate_wipe import RotateWipeTransition, RotateWipeDirection
+from .zoom import ZoomTransition, ZoomMode
 
 __all__ = [
     "Transition",
@@ -22,4 +23,6 @@ __all__ = [
     "PuzzleTransition",
     "RotateWipeTransition",
     "RotateWipeDirection",
+    "ZoomTransition",
+    "ZoomMode",
 ]
