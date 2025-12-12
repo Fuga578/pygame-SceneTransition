@@ -8,6 +8,7 @@ from scripts.transition import FadeTransition, FadeMode, \
     PuzzleTransition, RotateWipeTransition, RotateWipeDirection, \
     ZoomTransition, ZoomMode, MosaicTransition, MosaicMode, \
     ScanlineTransition, ScanlineDirection, FlipTransition, FlipAxis
+from scripts.scene.overlay import PauseScene
 
 
 class TitleScene(Scene):
@@ -25,6 +26,7 @@ class TitleScene(Scene):
         self.small_font = pygame.font.SysFont(None, 32)
 
         self.title_text = self.font.render("Title Scene", True, (255, 255, 255))
+        self.pause_text = self.small_font.render("p: Pause", True, (255, 255, 255))
         self.fade_scene_text = self.small_font.render("w: Go to Fade Scene", True, (255, 255, 255))
         self.slide_scene_text = self.small_font.render("a: Go to Slide Scene", True, (255, 255, 255))
         self.wipe_scene_text = self.small_font.render("s: Go to Wipe Scene", True, (255, 255, 255))
@@ -43,7 +45,9 @@ class TitleScene(Scene):
         self.screen_shake_effect = ScreenShakeEffect()
 
     def handle(self):
-        if self.game.inputs["q"]:
+        if self.game.inputs["p"]:
+            self.manager.push_overlay(PauseScene(self.game, self.manager))
+        elif self.game.inputs["q"]:
             self.game.exit()
         elif self.game.inputs["w"]:
             self.manager.change_scene(
@@ -109,17 +113,18 @@ class TitleScene(Scene):
     def render(self, surface):
         surface.fill(self.bg_color)
         surface.blit(self.title_text, (50, 50))
-        surface.blit(self.fade_scene_text, (50, 100))
-        surface.blit(self.slide_scene_text, (50, 140))
-        surface.blit(self.wipe_scene_text, (50, 180))
-        surface.blit(self.blind_scene_text, (50, 220))
-        surface.blit(self.circle_wipe_text, (50, 260))
-        surface.blit(self.puzzle_text, (50, 300))
-        surface.blit(self.rotate_slide_text, (50, 340))
-        surface.blit(self.zoom_text, (50, 380))
-        surface.blit(self.screen_shake_text, (50, 420))
-        surface.blit(self.mosaic_text, (50, 460))
-        surface.blit(self.scanline_text, (50, 500))
-        surface.blit(self.flip_text, (50, 540))
+        surface.blit(self.pause_text, (50, 100))
+        surface.blit(self.fade_scene_text, (50, 140))
+        surface.blit(self.slide_scene_text, (50, 180))
+        surface.blit(self.wipe_scene_text, (50, 220))
+        surface.blit(self.blind_scene_text, (50, 260))
+        surface.blit(self.circle_wipe_text, (50, 300))
+        surface.blit(self.puzzle_text, (50, 340))
+        surface.blit(self.rotate_slide_text, (50, 380))
+        surface.blit(self.zoom_text, (50, 420))
+        surface.blit(self.screen_shake_text, (50, 460))
+        surface.blit(self.mosaic_text, (50, 500))
+        surface.blit(self.scanline_text, (50, 540))
+        surface.blit(self.flip_text, (50, 580))
 
         self.screen_shake_effect.apply(surface)
