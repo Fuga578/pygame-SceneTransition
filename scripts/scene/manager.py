@@ -11,6 +11,7 @@ from scripts.scene.rotate_wipe import RotateWipeScene
 from scripts.scene.zoom import ZoomScene
 from scripts.scene.mosaic import MosaicScene
 from scripts.scene.scanline import ScanlineScene
+from scripts.scene.flip import FlipScene
 
 
 class SceneManager:
@@ -25,11 +26,26 @@ class SceneManager:
         self.game = game
         self.current_scene: Scene = self._create_scene(start_scene_id)
 
+        self.overlay_stack: list[Scene] = []  # オーバーレイシーンのスタック
+
         # トランジション関連
         self.transition = None      # 現在のトランジション（なければ None）
         self._next_scene = None     # トランジション後に切り替えるシーン
         self._old_surface = None    # トランジション用の古い画面キャプチャ
         self._new_surface = None    # トランジション用の新しい画面キャプチャ
+
+    def push_overlay(self, scene: Scene):
+        self.overlay_stack.append(scene)
+
+    def pop_overlay(self):
+        if self.overlay_stack:
+            self.overlay_stack.pop()
+
+    def clear_overlays(self):
+        self.overlay_stack.clear()
+
+    def _top_scene(self) -> Scene:
+        return self.overlay_stack[-1] if self.overlay_stack else self.current_scene
 
     def _create_scene(self, scene_id: SceneID) -> Scene:
         if scene_id == SceneID.TITLE:
@@ -54,6 +70,8 @@ class SceneManager:
             return MosaicScene(self.game, self)
         elif scene_id == SceneID.SCANLINE:
             return ScanlineScene(self.game, self)
+        elif scene_id == SceneID.FLIP:
+            return FlipScene(self.game, self)
         else:
             raise ValueError(f"未知の SceneID: {scene_id}")
 
@@ -81,9 +99,9 @@ class SceneManager:
         self.transition.start()
 
     def handle(self):
-        # トランジション中は入力を受け付けない
         if self.transition is None:
-            self.current_scene.handle()
+            self._top_scene().handle()
+
 
     def update(self, dt: float):
         # 遷移中の場合
@@ -97,7 +115,7 @@ class SceneManager:
                 self._next_scene = None
                 self.transition = None
         else:
-            self.current_scene.update(dt)
+            self._top_scene().update(dt)
 
     def render(self, surface):
         if self.transition:
@@ -112,4 +130,9 @@ class SceneManager:
                 self._new_surface
             )
         else:
+            # ベースシーン
             self.current_scene.render(surface)
+
+            # オーバーレイシーンがあれば重ねて描画
+            for overlay_scene in self.overlay_stack:
+                overlay_scene.render(surface)

@@ -9,6 +9,7 @@ from .rotate_wipe import RotateWipeTransition, RotateWipeDirection
 from .zoom import ZoomTransition, ZoomMode
 from .mosaic import MosaicTransition, MosaicMode
 from .scanline import ScanlineTransition, ScanlineDirection
+from .flip import FlipTransition, FlipAxis
 
 __all__ = [
     "Transition",

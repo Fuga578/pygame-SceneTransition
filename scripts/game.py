@@ -28,6 +28,7 @@ class Game:
             "down": False,
             "left": False,
             "right": False,
+            "p": False,
             "q": False,
             "z": False,
             "x": False,
@@ -70,6 +71,8 @@ class Game:
                     self.inputs["left"] = True
                 if event.key == pygame.K_RIGHT:
                     self.inputs["right"] = True
+                if event.key == pygame.K_p:
+                    self.inputs["p"] = True
                 if event.key == pygame.K_q:
                     self.inputs["q"] = True
                 if event.key == pygame.K_z:
@@ -107,6 +110,8 @@ class Game:
                     self.inputs["left"] = False
                 if event.key == pygame.K_RIGHT:
                     self.inputs["right"] = False
+                if event.key == pygame.K_p:
+                    self.inputs["p"] = False
                 if event.key == pygame.K_q:
                     self.inputs["q"] = False
                 if event.key == pygame.K_z:
