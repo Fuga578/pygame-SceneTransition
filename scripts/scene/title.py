@@ -7,7 +7,7 @@ from scripts.transition import FadeTransition, FadeMode, \
     BlindTransition, BlindDirection, CircleWipeTransition, CircleWipeMode, \
     PuzzleTransition, RotateWipeTransition, RotateWipeDirection, \
     ZoomTransition, ZoomMode, MosaicTransition, MosaicMode, \
-    ScanlineTransition, ScanlineDirection
+    ScanlineTransition, ScanlineDirection, FlipTransition, FlipAxis
 
 
 class TitleScene(Scene):
@@ -36,6 +36,7 @@ class TitleScene(Scene):
         self.screen_shake_text = self.small_font.render("Enter: Screen Shake", True, (255, 255, 255))
         self.mosaic_text = self.small_font.render("z: Go to Mosaic Scene", True, (255, 255, 255))
         self.scanline_text = self.small_font.render("x: Go to Scanline Scene", True, (255, 255, 255))
+        self.flip_text = self.small_font.render("c: Go to Flip Scene", True, (255, 255, 255))
 
         self.bg_color = (random.randint(0, 150), random.randint(0, 150), random.randint(0, 150))
         
@@ -96,6 +97,11 @@ class TitleScene(Scene):
                 SceneID.SCANLINE,
                 transition=ScanlineTransition(direction=ScanlineDirection.VERTICAL)
             )
+        elif self.game.inputs["c"]:
+            self.manager.change_scene(
+                SceneID.FLIP,
+                transition=FlipTransition(axis=FlipAxis.Y)
+            )
 
     def update(self, dt):
         self.screen_shake_effect.update(dt)
@@ -114,5 +120,6 @@ class TitleScene(Scene):
         surface.blit(self.screen_shake_text, (50, 420))
         surface.blit(self.mosaic_text, (50, 460))
         surface.blit(self.scanline_text, (50, 500))
+        surface.blit(self.flip_text, (50, 540))
 
         self.screen_shake_effect.apply(surface)

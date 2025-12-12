@@ -13,3 +13,4 @@ class SceneID(Enum):
     ZOOM = auto()  # ズーム遷移デモシーン
     MOSAIC = auto()  # モザイク遷移デモシーン
     SCANLINE = auto()  # スキャンライン遷移デモシーン
+    FLIP = auto()  # フリップ遷移デモシーン
