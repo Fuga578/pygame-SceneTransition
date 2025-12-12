@@ -12,3 +12,4 @@ class SceneID(Enum):
     ROTATE_WIPE = auto()  # 回転ワイプ遷移デモシーン
     ZOOM = auto()  # ズーム遷移デモシーン
     MOSAIC = auto()  # モザイク遷移デモシーン
+    SCANLINE = auto()  # スキャンライン遷移デモシーン

@@ -18,7 +18,7 @@ class MosaicScene(Scene):
         self.manager = manager
 
         self.font = pygame.font.SysFont(None, 64)
-        self.title_text = self.font.render("Title Scene", True, (255, 255, 255))
+        self.title_text = self.font.render("Mosaic Scene", True, (255, 255, 255))
 
         self.small_font = pygame.font.SysFont(None, 32)
         self.back_text = self.small_font.render("Esc: Back to Title", True, (255, 255, 255))

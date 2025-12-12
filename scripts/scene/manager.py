@@ -10,6 +10,7 @@ from scripts.scene.puzzle import PuzzleScene
 from scripts.scene.rotate_wipe import RotateWipeScene
 from scripts.scene.zoom import ZoomScene
 from scripts.scene.mosaic import MosaicScene
+from scripts.scene.scanline import ScanlineScene
 
 
 class SceneManager:
@@ -51,6 +52,8 @@ class SceneManager:
             return ZoomScene(self.game, self)
         elif scene_id == SceneID.MOSAIC:
             return MosaicScene(self.game, self)
+        elif scene_id == SceneID.SCANLINE:
+            return ScanlineScene(self.game, self)
         else:
             raise ValueError(f"未知の SceneID: {scene_id}")
 

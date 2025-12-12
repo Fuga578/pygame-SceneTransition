@@ -8,6 +8,7 @@ from .puzzle import PuzzleTransition
 from .rotate_wipe import RotateWipeTransition, RotateWipeDirection
 from .zoom import ZoomTransition, ZoomMode
 from .mosaic import MosaicTransition, MosaicMode
+from .scanline import ScanlineTransition, ScanlineDirection
 
 __all__ = [
     "Transition",
@@ -28,4 +29,6 @@ __all__ = [
     "ZoomMode",
     "MosaicTransition",
     "MosaicMode",
+    "ScanlineTransition",
+    "ScanlineDirection",
 ]
